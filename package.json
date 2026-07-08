@@ -37,6 +37,11 @@
   "peerDependencies": {
     "jiti": "^2.0.0"
   },
+  "peerDependenciesMeta": {
+    "jiti": {
+      "optional": true
+    }
+  },
   "packageManager": "pnpm@11.9.0",
   "publishConfig": {
     "access": "public",
