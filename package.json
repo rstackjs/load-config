@@ -1,0 +1,48 @@
+{
+  "name": "rsbuild-plugin-example",
+  "version": "0.0.0",
+  "repository": "https://github.com/rstackjs/rsbuild-plugin-template",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib",
+    "dev": "rslib -w",
+    "lint": "rslint && prettier -c .",
+    "lint:write": "rslint --fix && prettier -w .",
+    "test": "playwright test",
+    "bump": "pnpx bumpp"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@rsbuild/core": "^2.1.2",
+    "@rslib/core": "^0.23.1",
+    "@rslint/core": "^0.6.4",
+    "@types/node": "^24.13.2",
+    "playwright": "^1.61.1",
+    "prettier": "^3.9.4",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "@rsbuild/core": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@rsbuild/core": {
+      "optional": true
+    }
+  },
+  "packageManager": "pnpm@11.9.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
