@@ -1,9 +1,8 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { expect, test } from 'rstack/test';
 import { loadConfig } from '../../src/index';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
 
 test('should load default config from configured file names', async () => {
   const result = await loadConfig<{ name: string }>({
