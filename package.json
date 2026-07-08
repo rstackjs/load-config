@@ -19,18 +19,18 @@
     "dev": "rslib -w",
     "lint": "rslint && prettier -c .",
     "lint:write": "rslint --fix && prettier -w .",
-    "test": "playwright test",
+    "test": "rstest",
     "bump": "pnpx bumpp"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1",
     "@rsbuild/core": "^2.1.2",
     "@rslib/core": "^0.23.1",
     "@rslint/core": "^0.6.4",
+    "@rstest/adapter-rslib": "^0.11.0",
+    "@rstest/core": "^0.11.0",
     "@types/node": "^24.13.2",
     "fresh-import": "^0.2.1",
     "jiti": "^2.7.0",
-    "playwright": "^1.61.1",
     "prettier": "^3.9.4",
     "typescript": "^6.0.3"
   },
