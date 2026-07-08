@@ -1,6 +1,6 @@
 # @rstackjs/load-config
 
-Load JavaScript and TypeScript configuration files with a small, framework-agnostic API.
+A config loading utility for the Rstack ecosystem, designed for loading JavaScript and TypeScript config files for projects like Rspack and Rsbuild.
 
 <p>
   <a href="https://npmjs.com/package/@rstackjs/load-config">
@@ -13,10 +13,14 @@ Load JavaScript and TypeScript configuration files with a small, framework-agnos
 ## Installation
 
 ```bash
-npm add @rstackjs/load-config jiti
+npm add @rstackjs/load-config -D
 ```
 
-`jiti` is a peer dependency and is used when a config file cannot be loaded with the native runtime loader.
+[jiti](https://github.com/unjs/jiti) is an optional peer dependency. Install it only when you use the `jiti` or `auto` loaders:
+
+```bash
+npm add jiti -D
+```
 
 ## Usage
 
@@ -53,6 +57,32 @@ type LoadConfigResult<Config = unknown> = {
 
 If no config file is found, `content` is an empty object, `filePath` is `null`, and `dependencies` is an empty array.
 
+## Supported Exports
+
+Default object export:
+
+```ts
+export default {
+  name: 'my-tool',
+};
+```
+
+Function export:
+
+```ts
+export default ({ mode }) => {
+  return { mode };
+};
+```
+
+Async function export:
+
+```ts
+export default async ({ mode }) => {
+  return { mode };
+};
+```
+
 ## API
 
 ### loadConfig
@@ -83,22 +113,25 @@ When `path` is provided, the file must exist. Relative paths are resolved from `
 
 ```ts
 await loadConfig({
-  path: 'custom.config.ts',
+  path: path.join(import.meta.dirname, 'custom.config.ts'),
 });
 ```
 
 #### configFileNames
 
-File names to search in `cwd` when `path` is not provided.
+A list of file names to search in `cwd` when `path` is not provided.
 
 - Type: `string[]`
 - Default: `[]`
 
-This package has no built-in config file names. Frameworks and tools should pass their own candidates explicitly.
-
 ```ts
 await loadConfig({
-  configFileNames: ['tool.config.ts', 'tool.config.mjs'],
+  configFileNames: [
+    'tool.config.ts',
+    'tool.config.mts',
+    'tool.config.js',
+    'tool.config.mjs',
+  ],
 });
 ```
 
@@ -109,7 +142,11 @@ Controls how the config file is loaded.
 - Type: `'auto' | 'jiti' | 'native'`
 - Default: `'auto'`
 
-`auto` uses the native loader when possible and falls back to `jiti`. JavaScript config files (`.js`, `.mjs`, `.cjs`) are always attempted with native dynamic import first; if native import fails and `loader` is not `native`, they fall back to `jiti`. TypeScript config files use the native loader in runtimes with TypeScript support, Bun, or Deno; otherwise they use `jiti`.
+`auto` uses the native loader when possible and falls back to `jiti`.
+
+JavaScript config files (`.js`, `.mjs`, `.cjs`) are always attempted with native dynamic import first; if native import fails and `loader` is not `native`, they fall back to `jiti`.
+
+TypeScript config files use the native loader in runtimes with TypeScript support, Bun, or Deno; otherwise they use `jiti`.
 
 Set `loader` to `native` to disable the `jiti` fallback.
 
@@ -182,35 +219,7 @@ await loadConfig({
 });
 ```
 
-When available from the underlying loader, `dependencies` contains absolute paths for files imported by the config file.
-
-## Supported Exports
-
-Default object export:
-
-```ts
-export default {
-  name: 'my-tool',
-};
-```
-
-Named object export:
-
-```ts
-export const config = {
-  name: 'my-tool',
-};
-```
-
-Function export:
-
-```ts
-export default async ({ mode }: { mode: string }) => {
-  return {
-    mode,
-  };
-};
-```
+When using the `native` loader and `fresh` is enabled, `dependencies` contains absolute paths for files imported by the config file.
 
 ## License
 
