@@ -1,7 +1,5 @@
 # @rstackjs/load-config
 
-A config loading utility for the Rstack ecosystem, designed for loading JavaScript and TypeScript config files for projects like Rspack and Rsbuild.
-
 <p>
   <a href="https://npmjs.com/package/@rstackjs/load-config">
    <img src="https://img.shields.io/npm/v/@rstackjs/load-config?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" />
@@ -9,6 +7,8 @@ A config loading utility for the Rstack ecosystem, designed for loading JavaScri
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="license" />
   <a href="https://npmcharts.com/compare/@rstackjs/load-config?minimal=true"><img src="https://img.shields.io/npm/dm/@rstackjs/load-config.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="downloads" /></a>
 </p>
+
+A config loading utility for the Rstack ecosystem, designed for loading JavaScript and TypeScript config files for projects like Rspack and Rsbuild.
 
 ## Installation
 

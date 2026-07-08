@@ -1,8 +1,5 @@
 {
   "search.useIgnoreFiles": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": [
-    "rstack",
-    "rstackjs"
-  ]
+  "cSpell.words": ["rstack", "rstackjs"]
 }
