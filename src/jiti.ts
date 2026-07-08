@@ -12,7 +12,7 @@ export const loadWithJiti = async <Config, Params extends unknown[]>(
     ({ createJiti } = await import('jiti'));
   } catch (error) {
     throw new Error(
-      '`jiti` is required to load this config. Please install it first.',
+      'The "jiti" package is required to load this config. Install it with your package manager.',
       { cause: error },
     );
   }

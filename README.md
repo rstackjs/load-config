@@ -17,7 +17,7 @@ npm add @rstackjs/load-config jiti
 ```
 
 `jiti` is a peer dependency and is used when a config file cannot be loaded with the native runtime loader.
-w
+
 ## Usage
 
 ```ts
