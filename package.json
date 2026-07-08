@@ -1,7 +1,7 @@
 {
-  "name": "rsbuild-plugin-example",
+  "name": "@rstackjs/load-config",
   "version": "0.0.0",
-  "repository": "https://github.com/rstackjs/rsbuild-plugin-template",
+  "repository": "https://github.com/rstackjs/load-config",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -28,17 +28,11 @@
     "@rslib/core": "^0.23.1",
     "@rslint/core": "^0.6.4",
     "@types/node": "^24.13.2",
+    "fresh-import": "^0.2.1",
+    "jiti": "^2.7.0",
     "playwright": "^1.61.1",
     "prettier": "^3.9.4",
     "typescript": "^6.0.3"
-  },
-  "peerDependencies": {
-    "@rsbuild/core": "^2.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@rsbuild/core": {
-      "optional": true
-    }
   },
   "packageManager": "pnpm@11.9.0",
   "publishConfig": {

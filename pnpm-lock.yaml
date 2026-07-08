@@ -19,10 +19,16 @@ importers:
         version: 0.23.1(typescript@6.0.3)
       '@rslint/core':
         specifier: ^0.6.4
-        version: 0.6.4
+        version: 0.6.4(jiti@2.7.0)
       '@types/node':
         specifier: ^24.13.2
         version: 24.13.2
+      fresh-import:
+        specifier: ^0.2.1
+        version: 0.2.1
+      jiti:
+        specifier: ^2.7.0
+        version: 2.7.0
       playwright:
         specifier: ^1.61.1
         version: 1.61.1
@@ -282,10 +288,18 @@ packages:
   '@types/node@24.13.2':
     resolution: {integrity: sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==}
 
+  fresh-import@0.2.1:
+    resolution: {integrity: sha512-fwvkgwvZ60xFe0FQ5nynh9mgayR5HY0e0rzPs2cDiGhrOo7N8ARyMHP0Ew7bUFe7QAaZmouphLnCoJKAe6dTog==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+
   fsevents@2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  jiti@2.7.0:
+    resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
+    hasBin: true
 
   picomatch@4.0.4:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
@@ -419,7 +433,7 @@ snapshots:
       - '@typescript/native-preview'
       - core-js
 
-  '@rslint/core@0.6.4':
+  '@rslint/core@0.6.4(jiti@2.7.0)':
     dependencies:
       picomatch: 4.0.4
     optionalDependencies:
@@ -431,6 +445,7 @@ snapshots:
       '@rslint/native-linux-x64-musl': 0.6.4
       '@rslint/native-win32-arm64-msvc': 0.6.4
       '@rslint/native-win32-x64-msvc': 0.6.4
+      jiti: 2.7.0
 
   '@rslint/native-darwin-arm64@0.6.4':
     optional: true
@@ -530,8 +545,12 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
+  fresh-import@0.2.1: {}
+
   fsevents@2.3.2:
     optional: true
+
+  jiti@2.7.0: {}
 
   picomatch@4.0.4: {}
 
