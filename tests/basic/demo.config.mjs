@@ -1,1 +1,1 @@
-export default { name: 'rstest' };
+export default { name: 'test' };
