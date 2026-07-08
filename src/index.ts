@@ -138,7 +138,10 @@ const getConfigExport = <Config, Params extends unknown[]>(
 
 const tryFreshImport = async (configFileURL: string) => {
   try {
-    const { freshImport } = await import('fresh-import');
+    const { freshImport } = await import(
+      /* rspackChunkName: 'freshImport' */
+      'fresh-import'
+    );
     return await freshImport(configFileURL);
   } catch {
     //
