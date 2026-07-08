@@ -6,7 +6,17 @@ export const loadWithJiti = async <Config, Params extends unknown[]>(
   exportName: string | false,
   fresh: boolean,
 ): Promise<LoadedConfig<Config, Params>> => {
-  const { createJiti } = await import('jiti');
+  let createJiti: (typeof import('jiti'))['createJiti'];
+
+  try {
+    ({ createJiti } = await import('jiti'));
+  } catch (error) {
+    throw new Error(
+      '`jiti` is required to load this config. Please install it first.',
+      { cause: error },
+    );
+  }
+
   const jiti = createJiti(configPath, {
     moduleCache: !fresh,
     interopDefault: true,
