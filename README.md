@@ -13,13 +13,27 @@ A config loading utility for the Rstack ecosystem, designed for loading JavaScri
 ## Installation
 
 ```bash
+# pnpm
+pnpm add @rstackjs/load-config -D
+# yarn
+yarn add @rstackjs/load-config -D
+# npm
 npm add @rstackjs/load-config -D
+# bun
+bun add @rstackjs/load-config -D
 ```
 
 [jiti](https://github.com/unjs/jiti) is an optional peer dependency. Install it only when you use the `jiti` or `auto` loaders:
 
 ```bash
+# pnpm
+pnpm add jiti -D
+# yarn
+yarn add jiti -D
+# npm
 npm add jiti -D
+# bun
+bun add jiti -D
 ```
 
 ## Usage
