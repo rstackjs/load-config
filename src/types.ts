@@ -20,7 +20,7 @@ export type LoadConfigOptions<Params extends unknown[] = []> = {
   path?: string;
   /**
    * Config file names to search in `cwd` when `path` is not provided.
-   * The package-level loader has no built-in framework defaults.
+   * Required when `path` is not provided.
    * @default []
    */
   configFileNames?: string[];
