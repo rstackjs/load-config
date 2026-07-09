@@ -4,3 +4,5 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - rstack
+  - typescript
+  - '@typescript/*'

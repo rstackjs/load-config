@@ -28,7 +28,7 @@
     "jiti": "^2.7.0",
     "prettier": "^3.9.4",
     "rstack": "0.0.2",
-    "typescript": "^7.0.1-rc"
+    "typescript": "^7.0.2"
   },
   "peerDependencies": {
     "jiti": "^2.0.0"
