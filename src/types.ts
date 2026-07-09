@@ -26,6 +26,9 @@ export type LoadConfigOptions<Params extends unknown[] = []> = {
   configFileNames?: string[];
   /**
    * Specify the config loader, can be `auto`, `jiti` or `native`.
+   * - 'auto': Use native Node.js loader first, fallback to jiti if failed
+   * - 'jiti': Use `jiti` as loader, which supports TypeScript and ESM out of the box
+   * - 'native': Use native Node.js loader, requires TypeScript support in Node.js >= 22.6
    * @default 'auto'
    */
   loader?: ConfigLoader;
