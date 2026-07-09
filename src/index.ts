@@ -27,6 +27,12 @@ export async function loadConfig<
   configParams = [] as unknown as Params,
   fresh = false,
 }: LoadConfigOptions<Params> = {}): Promise<LoadConfigResult<Config>> {
+  if (!path && configFileNames.length === 0) {
+    throw new Error(
+      'Either `path` or at least one `configFileNames` entry must be provided.',
+    );
+  }
+
   const configPath = resolveConfigPath(cwd, path, configFileNames);
 
   if (!configPath) {
