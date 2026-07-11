@@ -7,18 +7,6 @@ type NativeLoadResult = {
 
 export const JS_CONFIG_REGEXP = /\.(?:js|mjs|cjs)$/;
 
-const tryFreshImport = async (configFileURL: string) => {
-  try {
-    const { freshImport } = await import(
-      /* rspackChunkName: 'freshImport' */
-      'fresh-import'
-    );
-    return await freshImport(configFileURL);
-  } catch {
-    //
-  }
-};
-
 export const loadWithNative = async (
   configPath: string,
   fresh: boolean,
@@ -33,7 +21,11 @@ export const loadWithNative = async (
     };
   }
 
-  const freshImportResult = await tryFreshImport(configFileURL);
+  const { freshImport } = await import(
+    /* rspackChunkName: 'freshImport' */
+    'fresh-import'
+  );
+  const freshImportResult = await freshImport(configFileURL);
 
   if (freshImportResult) {
     return {
