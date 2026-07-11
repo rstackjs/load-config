@@ -1,6 +1,6 @@
 {
   "name": "@rstackjs/load-config",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": "https://github.com/rstackjs/load-config",
   "license": "MIT",
   "type": "module",
