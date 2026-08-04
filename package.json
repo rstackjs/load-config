@@ -17,8 +17,8 @@
   "scripts": {
     "build": "rs lib",
     "dev": "rs lib -w",
-    "lint": "rs lint && prettier -c .",
-    "lint:write": "rs lint --fix && prettier -w .",
+    "lint": "rs lint && rs fmt --check",
+    "lint:write": "rs lint --fix && rs fmt",
     "test": "rs test",
     "prepare": "rs setup",
     "bump": "pnpx bumpp"
@@ -27,8 +27,7 @@
     "@types/node": "^24.13.2",
     "fresh-import": "^0.2.1",
     "jiti": "^2.7.0",
-    "prettier": "^3.9.4",
-    "rstack": "^0.2.0",
+    "rstack": "^0.3.2",
     "typescript": "^7.0.2"
   },
   "peerDependencies": {

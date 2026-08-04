@@ -1,3 +1,4 @@
+// Rstack configuration guide: https://rstack.rs/config
 import { define } from 'rstack';
 
 define.lib({
@@ -9,11 +10,11 @@ define.lint(async () => {
   return [js.configs.recommended, ts.configs.recommended];
 });
 
+define.fmt({
+  singleQuote: true,
+});
+
 define.staged({
-  '*.{md,mdx,json,css,less,scss}':
-    'prettier --write --no-error-on-unmatched-pattern',
-  '*.{js,jsx,ts,tsx,mjs,cjs}': [
-    'rs lint --type-check',
-    'prettier --write --no-error-on-unmatched-pattern',
-  ],
+  '*.{md,mdx,json,css,less,scss}': 'rs fmt',
+  '*.{js,jsx,ts,tsx,mjs,cjs}': ['rs lint --type-check', 'rs fmt'],
 });
