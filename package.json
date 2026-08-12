@@ -27,7 +27,7 @@
     "@types/node": "^24.13.2",
     "fresh-import": "^0.2.1",
     "jiti": "^2.7.0",
-    "rstack": "^0.5.0",
+    "rstack": "^0.5.1",
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
