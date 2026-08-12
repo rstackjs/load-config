@@ -1,5 +1,5 @@
 import { getConfigExport, isConfigFunction } from './helpers.js';
-import { loadWithJiti } from './jiti.js';
+import { loadWithJiti, normalizeContext } from './jiti.js';
 import { JS_CONFIG_REGEXP, loadWithNative } from './native.js';
 import { resolveConfigPath } from './resolve.js';
 import type {
@@ -75,7 +75,10 @@ export async function loadConfig<
     }
   }
 
+  let usedJiti = false;
+
   if (!loadedConfig) {
+    usedJiti = true;
     loadedConfig = await loadWithJiti<Config, Params>(
       configPath,
       exportName,
@@ -93,14 +96,14 @@ export async function loadConfig<
     }
 
     return {
-      content: result,
+      content: usedJiti ? normalizeContext(result) : result,
       filePath: configPath,
       dependencies,
     };
   }
 
   return {
-    content: configExport,
+    content: usedJiti ? normalizeContext(configExport) : configExport,
     filePath: configPath,
     dependencies,
   };
