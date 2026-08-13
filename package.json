@@ -16,9 +16,10 @@
   ],
   "scripts": {
     "build": "rs lib",
+    "check": "rs check --type-check",
     "dev": "rs lib -w",
-    "lint": "rs lint && rs fmt --check",
-    "lint:write": "rs lint --fix && rs fmt",
+    "format": "rs fmt",
+    "lint": "rs lint",
     "test": "rs test",
     "prepare": "rs setup",
     "bump": "pnpx bumpp"
@@ -27,7 +28,7 @@
     "@types/node": "^24.13.2",
     "fresh-import": "^0.2.1",
     "jiti": "^2.7.0",
-    "rstack": "^0.5.1",
+    "rstack": "^0.6.0",
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
