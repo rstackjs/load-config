@@ -21,14 +21,14 @@
     "format": "rs fmt",
     "lint": "rs lint",
     "test": "rs test",
-    "prepare": "rs setup",
+    "prepare": "rs hooks",
     "bump": "pnpx bumpp"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",
     "fresh-import": "^0.2.1",
     "jiti": "^2.7.0",
-    "rstack": "^0.6.0",
+    "rstack": "^0.6.4",
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
