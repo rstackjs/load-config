@@ -50,19 +50,34 @@ export type LoadConfigOptions<Params extends unknown[] = []> = {
   fresh?: boolean;
 };
 
+export type ConfigFileMeta = {
+  /**
+   * Absolute path of the actual configuration file.
+   * Use `null` when no underlying configuration file was found.
+   */
+  filePath: string | null;
+  /**
+   * Absolute paths of additional configuration dependencies.
+   * These are merged with the adapter file and its collected dependencies.
+   */
+  dependencies?: readonly string[];
+};
+
 export type LoadConfigResult<Config = unknown> = {
   /**
    * The loaded configuration object.
    */
   content: Config;
   /**
-   * The path to the loaded configuration file.
-   * Return `null` if the configuration file is not found.
+   * The path to the loaded configuration file, or the source set by `withConfigMeta`.
+   * Returns `null` if no configuration file was found, including an explicit
+   * `null` source set by `withConfigMeta`.
    */
   filePath: string | null;
   /**
-   * Absolute file paths of statically imported (relative) dependencies of the
-   * config file.
+   * Absolute paths of collected configuration dependencies. When `withConfigMeta`
+   * is used, also includes explicit dependencies and the loaded adapter file,
+   * with duplicates removed.
    */
   dependencies: string[];
 };

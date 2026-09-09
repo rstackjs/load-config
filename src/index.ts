@@ -1,5 +1,6 @@
 import { getConfigExport, isConfigFunction } from './helpers.js';
 import { loadWithJiti } from './jiti.js';
+import { getConfigMeta } from './meta.js';
 import { JS_CONFIG_REGEXP, loadWithNative } from './native.js';
 import { resolveConfigPath } from './resolve.js';
 import type {
@@ -8,8 +9,10 @@ import type {
   LoadConfigResult,
 } from './types.js';
 
+export { withConfigMeta } from './meta.js';
 export type {
   ConfigDefinition,
+  ConfigFileMeta,
   ConfigLoader,
   LoadConfigOptions,
   LoadConfigResult,
@@ -84,6 +87,7 @@ export async function loadConfig<
   }
 
   const { configExport, dependencies } = loadedConfig;
+  let content: Config;
 
   if (isConfigFunction(configExport)) {
     const result = await configExport(...configParams);
@@ -92,16 +96,24 @@ export async function loadConfig<
       throw new Error('The config function must return a config object.');
     }
 
-    return {
-      content: result,
-      filePath: configPath,
-      dependencies,
-    };
+    content = result;
+  } else {
+    content = configExport;
   }
 
-  return {
-    content: configExport,
+  const meta = getConfigMeta(content);
+  const result: LoadConfigResult<Config> = {
+    content,
     filePath: configPath,
     dependencies,
   };
+
+  if (meta) {
+    result.filePath = meta.filePath;
+    result.dependencies = [
+      ...new Set([...(meta.dependencies ?? []), configPath, ...dependencies]),
+    ];
+  }
+
+  return result;
 }

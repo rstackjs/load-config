@@ -235,6 +235,32 @@ await loadConfig({
 
 When using the `native` loader and `fresh` is enabled, `dependencies` contains absolute paths for files imported by the config file.
 
+### withConfigMeta
+
+Preserve the original config path and dependencies when loading through an adapter:
+
+```ts
+import { loadConfig, withConfigMeta } from '@rstackjs/load-config';
+
+// adapter.config.ts
+export default async () => {
+  const { content, filePath, dependencies } = await loadConfig<{
+    app: { source: { entry: string } };
+  }>({
+    configFileNames: ['project.config.ts'],
+    fresh: true,
+  });
+
+  return withConfigMeta(content.app ?? {}, { filePath, dependencies });
+};
+```
+
+`loadConfig` uses the supplied `filePath` and merges `dependencies` with the adapter file and its collected dependencies, removing duplicates.
+
+- Use absolute paths. `filePath: null` means no underlying config was found; `dependencies` is optional.
+- The helper modifies and returns the original config object. Repeated calls replace its metadata. Frozen or non-extensible objects are not supported.
+- Call it on the final config object: object spread and JSON serialization discard the metadata.
+
 ## License
 
 [MIT](./LICENSE).
