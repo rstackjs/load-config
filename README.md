@@ -240,19 +240,14 @@ When using the `native` loader and `fresh` is enabled, `dependencies` contains a
 Preserve the original config path and dependencies when loading through an adapter:
 
 ```ts
-import { loadConfig, withConfigMeta } from '@rstackjs/load-config';
+import { withConfigMeta } from '@rstackjs/load-config';
 
-// adapter.config.ts
-export default async () => {
-  const { content, filePath, dependencies } = await loadConfig<{
-    app: { source: { entry: string } };
-  }>({
-    configFileNames: ['project.config.ts'],
-    fresh: true,
-  });
+const config = { name: 'my-tool' };
 
-  return withConfigMeta(content.app ?? {}, { filePath, dependencies });
-};
+export default withConfigMeta(config, {
+  filePath: '/project/project.config.ts',
+  dependencies: ['/project/shared.ts'],
+});
 ```
 
 `loadConfig` uses the supplied `filePath` and merges `dependencies` with the adapter file and its collected dependencies, removing duplicates.
