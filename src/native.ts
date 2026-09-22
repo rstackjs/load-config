@@ -1,4 +1,9 @@
 import { pathToFileURL } from 'node:url';
+import { cachedImport } from './cachedImport.js';
+
+const getFreshImport = cachedImport(
+  () => import(/* rspackChunkName: 'freshImport' */ 'fresh-import'),
+);
 
 type NativeLoadResult = {
   configModule: unknown;
@@ -21,10 +26,7 @@ export const loadWithNative = async (
     };
   }
 
-  const { freshImport } = await import(
-    /* rspackChunkName: 'freshImport' */
-    'fresh-import'
-  );
+  const { freshImport } = await getFreshImport();
   const freshImportResult = await freshImport(configFileURL);
 
   if (freshImportResult) {

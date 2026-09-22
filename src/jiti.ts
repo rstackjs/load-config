@@ -1,5 +1,8 @@
+import { cachedImport } from './cachedImport.js';
 import { getConfigExport } from './helpers.js';
 import type { ConfigDefinition, LoadedConfig } from './types.js';
+
+const getJiti = cachedImport(() => import('jiti'));
 
 export const loadWithJiti = async <Config, Params extends unknown[]>(
   configPath: string,
@@ -9,7 +12,7 @@ export const loadWithJiti = async <Config, Params extends unknown[]>(
   let createJiti: (typeof import('jiti'))['createJiti'];
 
   try {
-    ({ createJiti } = await import('jiti'));
+    ({ createJiti } = await getJiti());
   } catch (error) {
     throw new Error(
       'The "jiti" package is required to load this config. Install it with your package manager.',
