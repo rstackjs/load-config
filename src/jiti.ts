@@ -3,20 +3,7 @@ import { getConfigExport } from './helpers.js';
 import type { ConfigDefinition, LoadedConfig } from './types.js';
 
 // Keep the injection API independent of the optional jiti package's types.
-type JitiModule = {
-  createJiti: (
-    id: string,
-    options: {
-      moduleCache: boolean;
-      interopDefault: boolean;
-      nativeModules: string[];
-    },
-  ) => {
-    import: <T>(id: string, options?: { default?: true }) => Promise<T>;
-  };
-};
-
-type JitiLoader = () => Promise<JitiModule>;
+type JitiLoader = () => Promise<{ createJiti: unknown }>;
 
 let getJiti: JitiLoader = cachedImport(() => import('jiti'));
 
@@ -34,10 +21,10 @@ export const loadWithJiti = async <Config, Params extends unknown[]>(
   exportName: string | false,
   fresh: boolean,
 ): Promise<LoadedConfig<Config, Params>> => {
-  let createJiti: JitiModule['createJiti'];
+  let createJiti: (typeof import('jiti'))['createJiti'];
 
   try {
-    ({ createJiti } = await getJiti());
+    ({ createJiti } = (await getJiti()) as typeof import('jiti'));
   } catch (error) {
     throw new Error(
       'The "jiti" package is required to load this config. Install it with your package manager.',
