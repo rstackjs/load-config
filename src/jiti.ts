@@ -10,7 +10,6 @@ let getJiti: JitiLoader = cachedImport(() => import('jiti'));
 /**
  * Set the lazy jiti importer for this module instance before loading configs.
  * Replaces the cached import without invoking the new importer.
- * @internal
  */
 export const setJitiLoader = (loader: JitiLoader): void => {
   getJiti = cachedImport(loader);
