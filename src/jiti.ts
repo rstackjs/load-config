@@ -2,14 +2,39 @@ import { cachedImport } from './cachedImport.js';
 import { getConfigExport } from './helpers.js';
 import type { ConfigDefinition, LoadedConfig } from './types.js';
 
-const getJiti = cachedImport(() => import('jiti'));
+// Keep the injection API independent of the optional jiti package's types.
+type JitiModule = {
+  createJiti: (
+    id: string,
+    options: {
+      moduleCache: boolean;
+      interopDefault: boolean;
+      nativeModules: string[];
+    },
+  ) => {
+    import: <T>(id: string, options?: { default?: true }) => Promise<T>;
+  };
+};
+
+type JitiLoader = () => Promise<JitiModule>;
+
+let getJiti: JitiLoader = cachedImport(() => import('jiti'));
+
+/**
+ * Set the lazy jiti importer for this module instance before loading configs.
+ * Replaces the cached import without invoking the new importer.
+ * @internal
+ */
+export const setJitiLoader = (loader: JitiLoader): void => {
+  getJiti = cachedImport(loader);
+};
 
 export const loadWithJiti = async <Config, Params extends unknown[]>(
   configPath: string,
   exportName: string | false,
   fresh: boolean,
 ): Promise<LoadedConfig<Config, Params>> => {
-  let createJiti: (typeof import('jiti'))['createJiti'];
+  let createJiti: JitiModule['createJiti'];
 
   try {
     ({ createJiti } = await getJiti());

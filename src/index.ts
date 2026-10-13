@@ -9,6 +9,7 @@ import type {
   LoadConfigResult,
 } from './types.js';
 
+export { setJitiLoader } from './jiti.js';
 export { withConfigMeta } from './meta.js';
 export type {
   ConfigDefinition,
